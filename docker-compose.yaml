@@ -1,0 +1,22 @@
+services:
+  e2vid:
+    image: e2vid:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    shm_size: '32gb'
+    privileged: true
+    network_mode: host
+    container_name: e2vid
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .:/app/rpg_e2vid
+      - ${DATA_DIR}:/data # Mount dataset
+
+    command: sleep infinity

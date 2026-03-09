@@ -56,4 +56,5 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 # Create python virtual environment via uv
 ENV PATH="/home/e2vid/.local/bin:$PATH"
 RUN cd /app/rpg_e2vid && \
+    uv pip install torch --torch-backend=auto && \
     uv sync
